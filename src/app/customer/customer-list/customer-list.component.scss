@@ -1,0 +1,25 @@
+.sort-down .arrow-down {
+    display: inline-block;
+}
+
+.sort-down .arrow-up {
+    display: none;
+}
+
+.sort-up .arrow-up {
+    display: inline-block;
+}
+
+.sort-up .arrow-down {
+    display: none;
+}
+
+.sort-down i,
+.sort-up i {
+    float: right;
+}
+
+.sort-down i.arrow-up,
+.sort-up i.arrow-up {
+    margin-top: 6px;
+}

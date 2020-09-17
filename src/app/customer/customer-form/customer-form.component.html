@@ -1,0 +1,32 @@
+<div [ngStyle]=" { 'display': 'inline-block', 'width': '100%' } ">
+    <h1 [ngStyle]=" { 'float': 'left' } ">{{title}} Customer</h1>
+    <button type="submit" class="btn btn-primary" [routerLink]="['/customer']" [style.float]="'right'" [style.margin.px]="20">Back</button>
+</div>
+
+<form>
+    <div class="form-group">
+        <label for="">Id</label>
+        <input disabled type="number" class="form-control" [(ngModel)]="currentCustomer.id" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+        <label for="">Name</label>
+        <input type="text" class="form-control" required minlength="4" [(ngModel)]="currentCustomer.name" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+        <label for="">Country</label>
+        <input type="text" class="form-control" [(ngModel)]="currentCustomer.country" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+        <label for="">Phone</label>
+        <input type="text" class="form-control" [(ngModel)]="currentCustomer.phone" [ngModelOptions]="{standalone: true}">
+    </div>
+    <ng-template *ngIf="title === 'Add'; then addBlock else editBlock">
+    </ng-template>
+    <ng-template #addBlock>
+        <button type="submit" class="btn btn-primary" [style.margin-right.px]="20" (click)="onSubmit()">Add</button>
+    </ng-template>
+    <ng-template #editBlock>
+        <button type="submit" class="btn btn-primary" [style.margin-right.px]="20" (click)="onSubmit()">Edit</button>
+    </ng-template>
+    <button type="submit" class="btn btn-primary" [routerLink]="['/customer']">Cancel</button>
+</form>

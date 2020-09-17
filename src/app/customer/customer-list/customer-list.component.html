@@ -1,0 +1,69 @@
+<ng-container>
+    <div [ngStyle]="{
+      'margin-bottom' : '15px',
+      'display' : 'block',
+      'overflow' : 'auto'
+    }">
+        <h2>Customer List</h2>
+        <button type="submit" class="btn btn-success" [routerLink]="['/customer/add']">Add Customer</button>
+        <form class="form-inline" [style.float]="'right'">
+            Search By:
+            <select class="form-control" #optionSearch>
+              <option value="id" selected>Id</option>
+              <option value="name">Name</option>
+              <option value="country">Country</option>
+              <option value="phone">Phone Number</option>
+            </select>
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search" #textSearch>
+            <button class="btn btn-info" type="submit" (click)="handleSearch(optionSearch.value,textSearch.value)">
+              <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </form>
+    </div>
+</ng-container>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th (click)="sortList('id',sortByValueId)" [ngClass]="sortByValueId == 1? 'sort-up':'sort-down' ">ID
+                <i class="fa fa-sort-asc arrow-up" aria-hidden="true"></i>
+                <i class="fa fa-sort-desc arrow-down" aria-hidden="true"></i>
+            </th>
+            <th (click)="sortList('name',sortByValueName)" [ngClass]="sortByValueName == 1? 'sort-up':'sort-down' ">NAME
+                <i class="fa fa-sort-asc arrow-up" aria-hidden="true"></i>
+                <i class="fa fa-sort-desc arrow-down" aria-hidden="true"></i>
+            </th>
+            <th (click)="sortList('country',sortByValueCountry)" [ngClass]="sortByValueCountry == 1? 'sort-up':'sort-down' ">COUNTRY
+                <i class="fa fa-sort-asc arrow-up" aria-hidden="true"></i>
+                <i class="fa fa-sort-desc arrow-down" aria-hidden="true"></i>
+            </th>
+            <th>PHONE NUMBER</th>
+            <th>ACTION</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <input type="text" class="form-control" [(ngModel)]="idFilter">
+            </td>
+            <td>
+                <input type="text" class="form-control" [(ngModel)]="nameFilter">
+            </td>
+            <td>
+                <input type="text" class="form-control" [(ngModel)]="countryFilter">
+            </td>
+            <td>
+                <input type="text" class="form-control" [(ngModel)]="phoneFilter">
+            </td>
+        </tr>
+        <tr *ngFor="let item of customers | customerFilter : idFilter : nameFilter : countryFilter : phoneFilter | customerFind : valueOptionSearch : valueTextSearch | customerSort : sortBy : sortByValueId : sortByValueName : sortByValueCountry">
+            <td scope="row">{{item.id}}</td>
+            <td>{{item.name | nameFormat}}</td>
+            <td>{{item.country}}</td>
+            <td>{{item.phone | phoneFormat}}</td>
+            <td>
+                <button class="btn btn-warning" [style.margin-right.px]="10" [routerLink]="['/customer',item.id,'edit']"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                <button class="btn btn-danger" (click)="onDelete(item.id,item.name)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            </td>
+        </tr>
+    </tbody>
+</table>
