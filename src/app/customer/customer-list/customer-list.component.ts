@@ -13,19 +13,19 @@ export class CustomerListComponent implements OnInit {
   public subscription: Subscription;
   customers: Customer[];
 
-  //sort
+  //Sort Function
   sortBy:string = 'id';
   sortByValueId:number = 1;
   sortByValueName:number = 1;
   sortByValueCountry:number = 1;
 
-  //Filter
+  //Filter Function
   idFilter: string;
   nameFilter: string;
   countryFilter: string;
   phoneFilter: string;
 
-  //search
+  //Search Function
   valueOptionSearch: string;
   valueTextSearch: string;
 
@@ -44,11 +44,18 @@ export class CustomerListComponent implements OnInit {
     if (confirm('Are you sure to delete ' + name)) {
       this.subscription = this.customerService.deleteById(id).subscribe((data: Customer) => {
         this.updateAfterDelete(id);
+        this.fetchData();
       });
     }
     else{
       return;
     }
+  }
+
+  fetchData() {
+    this.subscription = this.customerService.getAll().subscribe(data => {
+      this.customers = data;
+    });
   }
 
   updateAfterDelete(id: number){
