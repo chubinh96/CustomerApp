@@ -29,14 +29,23 @@ export class CustomerListComponent implements OnInit {
   valueOptionSearch: string;
   valueTextSearch: string;
 
+  //Pagination
+  totalRecords: number;
+  page: number = 1;
+
   constructor(
     private customerService: CustomerService,
     private routeService: Router
   ) { }
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData(){
     this.subscription = this.customerService.getAll().subscribe(data => {
       this.customers = data;
+      this.totalRecords = data.length;
     });
   }
 
@@ -55,6 +64,7 @@ export class CustomerListComponent implements OnInit {
   fetchData() {
     this.subscription = this.customerService.getAll().subscribe(data => {
       this.customers = data;
+      this.totalRecords = data.length;
     });
   }
 
