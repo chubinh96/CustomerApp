@@ -17,7 +17,7 @@
         <input type="text" class="form-control" [(ngModel)]="currentCustomer.country" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="form-group">
-        <label for="">Phone</label>
+        <label for="">Phone Number</label>
         <input type="text" class="form-control" [(ngModel)]="currentCustomer.phone" [ngModelOptions]="{standalone: true}">
     </div>
     <ng-template *ngIf="title === 'Add'; then addBlock else editBlock">
