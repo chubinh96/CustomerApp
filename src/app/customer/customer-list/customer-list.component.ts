@@ -52,8 +52,9 @@ export class CustomerListComponent implements OnInit {
   onDelete(id: number, name: string){
     if (confirm('Are you sure to delete ' + name)) {
       this.subscription = this.customerService.deleteById(id).subscribe((data: Customer) => {
-        this.updateAfterDelete(id);
-        this.fetchData();
+        //this.updateAfterDelete(id);
+        //this.fetchData();
+        console.log(data);
       });
     }
     else{

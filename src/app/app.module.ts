@@ -20,6 +20,8 @@ import { CustomerFilterPipe } from './pipes/customer-filter.pipe';
 import { PhoneFormatPipe } from './pipes/phone-format.pipe';
 import { NameFormatPipe } from './pipes/name-format.pipe';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +40,7 @@ import { NameFormatPipe } from './pipes/name-format.pipe';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgxPaginationModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [CustomerService],

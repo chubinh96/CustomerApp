@@ -33,5 +33,6 @@ export class CustomerService {
   addNew(customer: Customer): Observable<Customer>{
     return this.http.post<Customer>(this.Api, customer);
   }
+  
 
 }

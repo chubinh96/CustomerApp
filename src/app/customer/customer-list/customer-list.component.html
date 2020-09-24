@@ -55,7 +55,11 @@
                 <input type="text" class="form-control" [(ngModel)]="phoneFilter">
             </td>
         </tr>
-        <tr *ngFor="let item of customers | customerFilter : idFilter : nameFilter : countryFilter : phoneFilter | customerFind : valueOptionSearch : valueTextSearch | customerSort : sortBy : sortByValueId : sortByValueName : sortByValueCountry">
+        <tr *ngFor="let item of customers | customerFilter : idFilter : nameFilter : countryFilter : phoneFilter | customerFind : valueOptionSearch : valueTextSearch | customerSort : sortBy : sortByValueId : sortByValueName : sortByValueCountry | paginate: {
+          id: 'listing_pagination',
+          itemsPerPage: 4,
+          currentPage: page,
+          totalItems: totalRecords}">
             <td scope="row">{{item.id}}</td>
             <td>{{item.name | nameFormat}}</td>
             <td>{{item.country}}</td>
@@ -67,3 +71,11 @@
         </tr>
     </tbody>
 </table>
+<div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="page = $event" directionLinks="true" id="listing_pagination" maxSize="5"></pagination-controls>
+        </ul>
+    </nav>
+</div>
+

@@ -28,5 +28,6 @@ export class CustomerSortPipe implements PipeTransform {
     }
     return customers;
   }
+  
 
 }
